@@ -1,21 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-monitoring
-  labels:
-    app: flask-monitoring
+  name: crccheck01-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-monitoring
+      app: crccheck01-dev
   template:
     metadata:
       labels:
-        app: flask-monitoring
+        app: crccheck01-dev
     spec:
       containers:
-      - name: flask-monitoring
-        image: hbayraktar/flask-monitoring:latest
-        ports:
-        - containerPort: 5000
+        - name: crccheck01-dev
+          image: crccheck/hello-world:latest
+          ports:
+            - containerPort: 4041
+            - containerPort: 8000
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "200m"
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
