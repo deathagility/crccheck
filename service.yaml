@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-monitoring-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: flask-monitoring
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
