@@ -5,13 +5,13 @@ pipeline {
         stage('Git Cloning') {
             steps {
                 echo 'Cloning git repo'
-                git url: 'https://github.com/hakanbayraktar/flask-monitoring.git',  branch: 'main'
+                git url: 'https://github.com/deathagility/crccheck.git',  branch: 'main'
             }
         }
         stage('Build Docker Image') {
             steps {
                 echo 'Building the image'
-                sh 'docker build -t flask-monitoring .'
+                sh 'docker build -t crccheck-dev-01 .'
             }
         }
         stage('Push to Docker Hub') {
@@ -20,8 +20,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh '''
                     echo "${PASS}" | docker login --username "${USER}" --password-stdin
-                    docker tag flask-monitoring ${USER}/flask-monitoring:latest
-                    docker push ${USER}/flask-monitoring:latest
+                    docker tag crccheck-dev-01 ${USER}/crccheck-dev-01:latest
+                    docker push ${USER}/crccheck-dev-01:latest
                     '''
                 }
             }
