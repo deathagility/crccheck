@@ -5,13 +5,13 @@ pipeline {
         stage('Git Cloning') {
             steps {
                 echo 'Cloning git repo'
-                git url: 'https://github.com/deathagility/crccheck.git',  branch: 'main'
+                git url: 'https://github.com/deathagility/crccheck.git',  branch: 'sit-dev'
             }
         }
         stage('Build Docker Image') {
             steps {
                 echo 'Building the image'
-                sh 'docker build -t crccheck-dev-01 .'
+                sh 'docker build -t crccheck-dev-02 .'
             }
         }
         stage('Push to Docker Hub') {
@@ -20,8 +20,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh '''
                     echo "${PASS}" | docker login --username "${USER}" --password-stdin
-                    docker tag crccheck-dev-01 ${USER}/crccheck-dev-01:latest
-                    docker push ${USER}/crccheck-dev-01:latest
+                    docker tag crccheck-dev-02 ${USER}/crccheck-dev-02:latest
+                    docker push ${USER}/crccheck-dev-02:latest
                     '''
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                     export KUBECONFIG=$(mktemp)
                     ./kubectl config set-cluster tdev-bam --server=https://172.19.3.230:6443 --insecure-skip-tls-verify=true
                     ./kubectl config set-credentials jenkins --token=${KUBE_TOKEN}
-                    ./kubectl config set-context tdev-bam01 --cluster=tdev-bam --user=tdev-bam-sa --namespace=tdev-bam01
+                    ./kubectl config set-context tdev-bam01 --cluster=tdev-bam --user=tdev-bam-sa --namespace=tdev-bam02
                     ./kubectl config use-context tdev-bam01
                     ./kubectl get nodes
                     ./kubectl apply -f service.yaml
