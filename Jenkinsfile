@@ -5,7 +5,7 @@ pipeline {
         stage('Git Cloning') {
             steps {
                 echo 'Cloning git repo'
-                git url: 'https://github.com/deathagility/crccheck.git',  branch: 'main'
+                git url: 'https://github.com/deathagility/crccheck.git',  branch: 'sit-dev'
             }
         }
         stage('Build Docker Image') {
