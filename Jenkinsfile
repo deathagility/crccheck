@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building the image'
-                sh 'docker build -t crccheck-dev-01 .'
+                sh 'docker build -t crccheck-dev:v1 .'
             }
         }
         stage('Push to Docker Hub') {
@@ -20,8 +20,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh '''
                     echo "${PASS}" | docker login --username "${USER}" --password-stdin
-                    docker tag crccheck-dev-01 ${USER}/crccheck-dev-01:latest
-                    docker push ${USER}/crccheck-dev-01:latest
+                    docker tag crccheck-dev:v1 ${USER}/crccheck-dev:v1
+                    docker push ${USER}/crccheck-dev:v1
                     '''
                 }
             }
