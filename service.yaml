@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: crcc-heck-dev-service
+  name: crcc-check-dev-service
 spec:
   selector:
-    app: crcc-heck-dev
+    app: crcc-check-dev
   ports:
     - protocol: TCP
       port: 80
