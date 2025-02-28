@@ -1,3 +1,3 @@
-FROM python:3.11-slim
+FROM crccheck/hello-world:latest
 EXPOSE 8080
 
