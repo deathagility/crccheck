@@ -35,7 +35,7 @@ pipeline {
                     export KUBECONFIG=$(mktemp)
                     ./kubectl config set-cluster tdev-bam --server=https://172.19.3.230:6443 --insecure-skip-tls-verify=true
                     ./kubectl config set-credentials jenkins --token=${KUBE_TOKEN}
-                    ./kubectl config set-context tdev-bam01 --cluster=tdev-bam --user=jenkins --namespace=tdev-bam02
+                    ./kubectl config set-context tdev-bam01 --cluster=tdev-bam --user=jenkins --namespace=tdev-bam03
                     ./kubectl config use-context tdev-bam01
                     ./kubectl apply -f service.yaml
                     ./kubectl apply -f deployment.yaml
