@@ -1,19 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: crccheck01-dev-ingress
+  name: crcc-check-dev-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    ingress.kubernetes.io/use-port-in-redirects: "true"
 spec:
   ingressClassName: nginx
   rules:
-    - host: crccheck01-dev.tdev.bam01.th
+    - host: crcc-check-dev-arctic.bamdns.local
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /?(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
-                name: crccheck01-dev-service
+                name: crcc-check-dev-service
                 port:
                   number: 80
