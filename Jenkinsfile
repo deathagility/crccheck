@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building the image'
-                sh 'docker build -t crccheck-dev:v1 .'
+                sh 'docker build -t crccheck-dev:v11 .'
             }
         }
         stage('Push to Docker Hub') {
