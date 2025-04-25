@@ -9,7 +9,7 @@ metadata:
     ingress.kubernetes.io/use-port-in-redirects: "true"
 spec:
   rules:
-    - host: crcc-check-tbam03-arctic.bamdns.local
+    - host: crcc-check-dev.bam-gis.arctic.bamdns.local
       http:
         paths:
           - path: /?(.*)
